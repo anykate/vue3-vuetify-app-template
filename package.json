@@ -1,0 +1,33 @@
+{
+    "name": "vue-template-app",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "lint": "eslint --fix 'src/**/*.{js,ts,jsx,tsx,vue}'",
+        "prettier": "npx prettier . --write",
+        "format": "npm run lint && npm run prettier"
+    },
+    "dependencies": {
+        "@mdi/font": "^7.3.67",
+        "axios": "^1.5.1",
+        "pinia": "^2.1.7",
+        "vite-plugin-vuetify": "^1.0.2",
+        "vue": "^3.3.6",
+        "vue-router": "^4.2.5",
+        "vuetify": "^3.3.22"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^4.4.0",
+        "eslint": "^8.52.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-vue": "^9.17.0",
+        "prettier": "^3.0.3",
+        "sass": "^1.69.4",
+        "vite": "^4.5.0",
+        "vue-toastification": "^2.0.0-rc.5"
+    }
+}
