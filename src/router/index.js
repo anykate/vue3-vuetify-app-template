@@ -1,20 +1,26 @@
 import { useUserStore } from '@/stores/user'
 import { createRouter, createWebHistory } from 'vue-router'
 
+const checkAuth = async (to, from) => {
+    const store = useUserStore()
+
+    if (!store.getToken && to.name !== 'login') {
+        return { name: 'login' }
+    }
+}
+
 const routes = [
     {
         path: '/',
         name: 'default',
         redirect: '/home',
         component: () => import('@/layouts/DefaultLayout.vue'),
-        meta: {
-            requiresAuth: true,
-        },
         children: [
             {
                 path: '/home',
                 name: 'home',
                 component: () => import('@/views/HomeView.vue'),
+                beforeEnter: checkAuth,
             },
             {
                 path: '/about',
@@ -28,9 +34,6 @@ const routes = [
         name: 'guest',
         redirect: '/login',
         component: () => import('@/layouts/GuestLayout.vue'),
-        meta: {
-            requiresAuth: false,
-        },
         children: [
             {
                 path: '/login',
@@ -56,22 +59,6 @@ const router = createRouter({
             }, 100)
         })
     },
-})
-
-router.beforeEach((to, from, next) => {
-    const store = useUserStore()
-
-    if (to.meta.requiresAuth && !store.getToken) {
-        next({ name: 'login', replace: true })
-    } else if (!to.meta.requiresAuth && store.getToken) {
-        if (to.name !== 'login') {
-            next()
-        } else {
-            next({ name: 'home', replace: true })
-        }
-    } else {
-        next()
-    }
 })
 
 export default router
