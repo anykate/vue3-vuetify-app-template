@@ -4,47 +4,45 @@ import { createRouter, createWebHistory } from 'vue-router'
 const checkAuth = async (to, from) => {
     const store = useUserStore()
 
-    if (!store.getToken && to.name !== 'login') {
-        return { name: 'login' }
+    if (!store.getToken && to.name !== 'Login') {
+        return { name: 'Login' }
     }
 }
 
 const routes = [
     {
         path: '/',
-        name: 'default',
-        redirect: '/home',
+        name: 'Default',
         component: () => import('@/layouts/DefaultLayout.vue'),
         children: [
             {
-                path: '/home',
-                name: 'home',
+                path: '',
+                name: 'Home',
                 component: () => import('@/views/HomeView.vue'),
                 beforeEnter: checkAuth,
             },
             {
-                path: '/about',
-                name: 'about',
+                path: 'about',
+                name: 'About',
                 component: () => import('@/views/AboutView.vue'),
             },
         ],
     },
     {
         path: '/',
-        name: 'guest',
-        redirect: '/login',
+        name: 'Guest',
         component: () => import('@/layouts/GuestLayout.vue'),
         children: [
             {
-                path: '/login',
-                name: 'login',
+                path: 'login',
+                name: 'Login',
                 component: () => import('@/views/LoginView.vue'),
             },
         ],
     },
     {
         path: '/:pathMatch(.*)',
-        name: 'notfound',
+        name: 'NotFound',
         component: () => import('@/views/NotFoundView.vue'),
     },
 ]

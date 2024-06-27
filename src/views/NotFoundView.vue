@@ -3,7 +3,7 @@
 <template>
     <v-icon icon="mdi-backspace"></v-icon>
     <router-link
-        :to="{ name: 'home' }"
+        :to="{ name: 'Home' }"
         class="ml-2"
     >
         Go back home
