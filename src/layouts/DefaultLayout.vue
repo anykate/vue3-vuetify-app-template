@@ -19,6 +19,6 @@ import { VApp, VContainer, VMain } from 'vuetify/components'
 <style scoped>
 .router-link-exact-active {
     color: green;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 </style>
