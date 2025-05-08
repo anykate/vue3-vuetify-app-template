@@ -1,23 +1,40 @@
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import js from '@eslint/js'
-import { FlatCompat } from '@eslint/eslintrc'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all,
-})
+import configPrettier from 'eslint-config-prettier'
+import pluginVue from 'eslint-plugin-vue'
+import globals from 'globals'
+import pluginTs from 'typescript-eslint'
 
 export default [
-    ...compat.extends(
-        'plugin:vue/vue3-recommended',
-        'plugin:vue/vue3-strongly-recommended',
-        'prettier'
-    ),
-    {
-        rules: {},
-    },
+	js.configs.recommended,
+	...pluginTs.configs.recommended,
+	...pluginVue.configs['flat/recommended'],
+	configPrettier,
+	{
+		languageOptions: {
+			globals: {
+				...globals.browser,
+			},
+			ecmaVersion: 2024,
+		},
+		rules: {
+			'arrow-body-style': ['error', 'as-needed'],
+			'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
+			'@typescript-eslint/no-unused-vars': 'off',
+		},
+	},
+	{
+		files: ['.prettierrc'],
+		languageOptions: {
+			globals: {
+				...globals.node,
+			},
+		},
+		rules: {
+			'@typescript-eslint/no-var-requires': 'off',
+			'@typescript-eslint/no-require-imports': 'off',
+		},
+	},
+	{
+		ignores: ['dist'],
+	},
 ]
