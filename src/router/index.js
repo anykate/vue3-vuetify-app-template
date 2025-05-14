@@ -1,11 +1,15 @@
 import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
 
-const checkAuth = async (to, from) => {
+const checkAuth = async (to, from, next) => {
 	const store = useUserStore()
+	const { getToken } = storeToRefs(store)
 
-	if (!store.getToken && to.name !== 'Login') {
-		return { name: 'Login' }
+	if (!getToken.value && to.name !== 'Login') {
+		next({ name: 'Login' })
+	} else {
+		next()
 	}
 }
 

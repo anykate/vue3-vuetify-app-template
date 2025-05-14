@@ -1,14 +1,18 @@
 <script setup>
 import { useCounterStore } from '@/stores/counter'
+import { storeToRefs } from 'pinia'
 
 const store = useCounterStore()
+
+const { increment, decrement } = store
+const { getDoubleCount, getCount } = storeToRefs(store)
 </script>
 
 <template>
 	<div>
 		<h1>Home</h1>
 
-		<!-- {{ store.doubleCount }} -->
+		<!-- {{ getDoubleCount }} -->
 
 		<v-row>
 			<v-col
@@ -18,19 +22,22 @@ const store = useCounterStore()
 				<div class="d-flex justify-space-between align-center">
 					<v-icon
 						icon="mdi-plus-circle"
-						@click="store.increment"
+						@click="increment"
 					></v-icon>
 
-					{{ store.count }}
+					{{ getCount }}
 
 					<v-icon
 						icon="mdi-minus-circle"
-						@click="store.decrement"
+						@click="decrement"
 					></v-icon>
 				</div>
 			</v-col>
-			<v-col>
-				<v-card color="green"> This is an empty space </v-card>
+			<v-col
+				cols="12"
+				md="10"
+			>
+				<v-card color="green pa-2"> This is an empty space </v-card>
 			</v-col>
 		</v-row>
 	</div>

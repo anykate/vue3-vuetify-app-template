@@ -10,6 +10,7 @@ import { createVuetify } from 'vuetify'
 import 'vuetify/styles'
 
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
 import Toast, { POSITION } from 'vue-toastification'
 
@@ -20,5 +21,5 @@ createApp(App)
 		position: POSITION.BOTTOM_RIGHT,
 	})
 	.use(createVuetify())
-	.use(createPinia())
+	.use(createPinia().use(piniaPluginPersistedstate))
 	.mount('#app')
