@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
 	state: () => ({
-		token: 'd', // Dummy value here means login successful -> navigate to Home
+		token: '', // Dummy value here means login successful -> navigate to Home
 	}),
 
 	persist: {

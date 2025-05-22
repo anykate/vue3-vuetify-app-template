@@ -2,6 +2,7 @@ import App from '@/App.vue'
 import router from '@/router'
 
 import '@/assets/css/style.css'
+import 'animate.css'
 import 'vue-toastification/dist/index.css'
 
 // Vuetify
